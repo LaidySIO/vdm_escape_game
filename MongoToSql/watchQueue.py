@@ -2,10 +2,11 @@
 #!/usr/local/bin/python3
 import boto3
 from mongo_mysql_actions import getReservation
+import os
 
 client = boto3.client('sqs', region_name='eu-west-1')
 # client.create_queue(QueueName='queueVdm')
-queues = client.list_queues(QueueNamePrefix='queueVdm')
+queues = client.list_queues(QueueNamePrefix=os.environ['QUEUE_NAME_PREFIX'])
 test_queue_url = queues['QueueUrls'][0]
 
 exit = True
