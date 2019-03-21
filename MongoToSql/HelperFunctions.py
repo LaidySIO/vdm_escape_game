@@ -15,17 +15,17 @@ def isAcheteur(newSpecateur, newAcheteur):
 # ##############################  SQL  ################################## #
 def mysqlConnexion():
     # Connexion Laidy RDS
-    db = MySQLdb.connect(host=os.environ['mysql_host'],
-                                   user=os.environ['mysql_user'],
-                                   passwd=os.environ['mysql_pwd'],
-                                   db=os.environ['mysql_db'])
+    db = MySQLdb.connect(host=os.environ['MYSQL_HOST'],
+                                   user=os.environ['MYSQL_USER'],
+                                   passwd=os.environ['MYSQL_PWD'],
+                                   db=os.environ['MYSQL_DB'])
     return db
 
 
 # ##############################  MONGO  ################################## #
 # fonction de connexion à la base
 def mongoClient():
-    client = pymongo.MongoClient(os.environ['mongo_client'])
+    client = pymongo.MongoClient(os.environ['MONGO_CLIENT'])
     return client
 
 
