@@ -24,6 +24,8 @@ def addReservationToSQL(reservation):
             "values('%d', '%d', '%s', '%s', '%s')" % (reservation.idSpectateur, reservation.idGame, reservation.dateHeure, datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), reservation.email)
     print(query)
     try:
+	if "'" in reservation.email:
+		reservation.email = "ERROR"
     	cur = db.cursor()
     	cur.execute(query)
     	reservation_id = db.insert_id()
@@ -31,7 +33,13 @@ def addReservationToSQL(reservation):
     except:
 	print("Faild to add reservation")
 	reservation_id = -1
-    db.close()
+	reservation.email = "ERROR"
+ 	cur = db.cursor()
+        cur.execute(query)
+        reservation_id = db.insert_id()
+        db.commit()
+    finally:
+	db.close()
 
     return reservation_id
 
