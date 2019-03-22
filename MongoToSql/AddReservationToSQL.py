@@ -1,6 +1,6 @@
 # coding=utf-8
 from HelperFunctions import mysqlConnexion
-
+import datetime
 
 # On crée la base et la table si elles n'existent pas
 def createIfNotExist():
@@ -13,6 +13,7 @@ def createIfNotExist():
                 "id_acheteur int(11) not null,"
                 "id_game int(11) not null,"
                 "dateheure datetime not null,"
+		"date_prise_reservation datetime not null,"
                 "email varchar(50) not null)")
     db.close()
 
@@ -20,7 +21,7 @@ def createIfNotExist():
 def addReservationToSQL(reservation):
     db = mysqlConnexion()
     query = "insert into reservation (id_acheteur, id_game, dateheure, email) " \
-            "values('%d', '%d', '%s', '%s')" % (reservation.idSpectateur, reservation.idGame, reservation.dateHeure, reservation.email)
+            "values('%d', '%d', '%s', '%s', '%s')" % (reservation.idSpectateur, reservation.idGame, reservation.dateHeure, datetime.datetime.now(), reservation.email)
     # print(query)
     try:
     	cur = db.cursor()
