@@ -20,9 +20,9 @@ def createIfNotExist():
 
 def addReservationToSQL(reservation):
     db = mysqlConnexion()
-    query = "insert into reservation (id_acheteur, id_game, dateheure, email) " \
-            "values('%d', '%d', '%s', '%s', '%s')" % (reservation.idSpectateur, reservation.idGame, reservation.dateHeure, datetime.datetime.now(), reservation.email)
-    # print(query)
+    query = "insert into reservation (id_acheteur, id_game, dateheure, date_prise_reservation, email) " \
+            "values('%d', '%d', '%s', '%s', '%s')" % (reservation.idSpectateur, reservation.idGame, reservation.dateHeure, datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), reservation.email)
+    print(query)
     try:
     	cur = db.cursor()
     	cur.execute(query)
